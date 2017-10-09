@@ -10,7 +10,7 @@
 
 @interface QuestionsCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *acceptedAnswerImage;
+@property (weak, nonatomic) IBOutlet UIImageView *acceptedAnswerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *questionTitle;
 @property (weak, nonatomic) IBOutlet UILabel *tags;
 @property (weak, nonatomic) IBOutlet UILabel *answerCount;
