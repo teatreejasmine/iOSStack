@@ -83,10 +83,10 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.9603100712435233" green="0.9603100712435233" blue="0.9603100712435233" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="acceptedAnswerImage" destination="23d-bN-guj" id="p4w-F0-3nI"/>
-                                    <outlet property="answerCount" destination="cQS-bF-McA" id="ezH-vw-KMR"/>
-                                    <outlet property="questionTitle" destination="3xz-8I-fuY" id="YyU-v6-Yv6"/>
-                                    <outlet property="tags" destination="7uL-ET-b4h" id="bYF-Qf-5ne"/>
+                                    <outlet property="acceptedAnswerImageView" destination="23d-bN-guj" id="or1-pJ-aAc"/>
+                                    <outlet property="answersLabel" destination="cQS-bF-McA" id="MnO-lI-N74"/>
+                                    <outlet property="questionTitleLabel" destination="3xz-8I-fuY" id="2qX-2q-Ij5"/>
+                                    <outlet property="tagsLabel" destination="7uL-ET-b4h" id="Ntu-a1-UX5"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -104,7 +104,6 @@
         <!--Navigation Controller-->
         <scene sceneID="DNK-bu-Bpd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H1Z-Pd-Nxy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ROr-aI-bka" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Fc-Ya-Hpm">
@@ -122,6 +121,7 @@
                         <segue destination="iyl-Z7-GwL" kind="relationship" relationship="rootViewController" id="jeu-Gj-shr"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H1Z-Pd-Nxy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2078" y="1108"/>
         </scene>

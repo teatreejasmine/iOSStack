@@ -65,15 +65,15 @@
     
     //Select image based on whether the answer is accepted or not
     if (questionData.accepted_answer_id) {
-        cell.acceptedAnswerImage.image =  [UIImage imageNamed: @"greencircle.png"];
+        cell.acceptedAnswerImageView.image =  [UIImage imageNamed: @"greencircle.png"];
         
     } else {
-        cell.acceptedAnswerImage.image =  [UIImage imageNamed: @"greycircle.png"];
+        cell.acceptedAnswerImageView.image =  [UIImage imageNamed: @"greycircle.png"];
     }
     
-    cell.questionTitle.text = questionData.title;
-    cell.answerCount.text = [NSString stringWithFormat:@"%@", questionData.answer_count];
-    cell.tags.text =  [questionData.tags componentsJoinedByString:@" "];
+    cell.questionTitleLabel.text = questionData.title;
+    cell.answersLabel.text = [NSString stringWithFormat:@"%@", questionData.answer_count];
+    cell.tagsLabel.text =  [questionData.tags componentsJoinedByString:@" "];
    
     return cell;
 }
