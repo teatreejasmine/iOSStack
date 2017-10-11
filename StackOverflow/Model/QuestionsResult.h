@@ -10,7 +10,7 @@
 
 @interface DataResult : NSObject
 
-+ (NSArray *)resultFromJSON:(NSData *)objectNotation error:(NSError **)error;
++ (NSArray *)questionsDataFromJSON:(NSData *)objectNotation error:(NSError **)error;
 
 
 @end

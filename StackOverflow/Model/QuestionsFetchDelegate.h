@@ -1,5 +1,5 @@
 //
-//  DataDelegate.h
+//  DataFetchDelegate.h
 //  StackOverflow
 //
 //  Created by Malea on 2017/10/04.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DataDelegate <NSObject>
+@protocol DataFetchDelegate <NSObject>
 
-- (void)receivedDataJSON:(NSData *)objectNotation;
+- (void)didReceiveQuestionGroups:(NSArray *)groups;
 - (void)fetchingDataFailedWithError:(NSError *)error;
 
 @end

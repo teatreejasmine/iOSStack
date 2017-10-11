@@ -7,11 +7,11 @@
 //
 
 #import "DataResult.h"
-#import "QuestionsData.h"
+#import "QuestionsFields.h"
 
 @implementation DataResult
 
-+ (NSArray *)resultFromJSON:(NSData *)objectNotation error:(NSError **)error {
++ (NSArray *)questionsDataFromJSON:(NSData *)objectNotation error:(NSError **)error {
     
     NSError *localError = nil;
     NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:objectNotation options:0 error:&localError];
@@ -31,17 +31,17 @@
     NSArray *array = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&err];
 
     for (NSDictionary *questionDictionary in array) {
-        QuestionsData *questionData = [[QuestionsData alloc] init];
+        QuestionsFields *questionFields = [[QuestionsFields alloc] init];
         
         for (NSString *key in questionDictionary) {
 
-            if ([questionData respondsToSelector:NSSelectorFromString(key)]) {
-                [questionData setValue:[questionDictionary valueForKey:key] forKey:key];
+            if ([questionFields respondsToSelector:NSSelectorFromString(key)]) {
+                [questionFields setValue:[questionDictionary valueForKey:key] forKey:key];
 
             }
 
         }
-        [data addObject:questionData];
+        [data addObject:questionFields];
     }
 
     return data;

@@ -6,24 +6,24 @@
 //  Copyright © 2017 DVT. All rights reserved.
 //
 
-#import "QuestionsDataObject.h"
+#import "QuestionsResultFetch.h"
 #import "DataResult.h"
 
-@implementation QuestionsDataObject
+@implementation QuestionsResultFetch
 
-- (void)getData {
+- (void)fetchQuestions {
     [self.questionRequest fetchData];
 }
 
 - (void)receivedDataJSON:(NSData *)objectNotation {
     NSError *error = nil;
-    NSArray *dataResult = [DataResult resultFromJSON:objectNotation error:&error];
+    NSArray *questionsGroup = [DataResult questionsDataFromJSON:objectNotation error:&error];
     
     if (error != nil) {
         [self.delegate fetchingDataFailedWithError:error];
 
     } else {
-        [self.delegate didReceiveData:dataResult];
+        [self.delegate didReceiveQuestionGroups:questionsGroup];
     }
 }
 
