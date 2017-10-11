@@ -8,14 +8,13 @@
 
 #import "QuestionsTableViewController.h"
 #import "QuestionsCell.h"
-#import "DataFetchDelegate.h"
-#import "QuestionsDataObject.h"
-#import "QuestionsData.h"
+#import "QuestionsFetchDelegate.h"
+#import "QuestionsResultFetch.h"
+#import "QuestionsFields.h"
 
-
-@interface QuestionsTableViewController () <DataFetchDelegate> {
-    NSArray *dataResult;
-    QuestionsDataObject *dataObject;
+@interface QuestionsTableViewController () <QuestionsFetchDelegate> {
+    NSArray *questionGroupResult;
+    QuestionsResultFetch *_questionResult;
     UIActivityIndicatorView *activityIndicator;
 }
 
@@ -23,23 +22,21 @@
 
 @implementation QuestionsTableViewController
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Display a code loading indicator
+    //Display an activity indicator
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicator.alpha = 1.0;
+    activityIndicator.center = self.view.center;
     [self.view addSubview:activityIndicator];
-    activityIndicator.center = CGPointMake([[UIScreen mainScreen]bounds].size.width/2, [[UIScreen mainScreen]bounds].size.height/2);
     [activityIndicator startAnimating];
-
-    dataObject = [[QuestionsDataObject alloc] init];
-    dataObject.questionRequest = [[QuestionRequest alloc] init];
-    dataObject.questionRequest.delegate = dataObject;
-    dataObject.delegate = self;
     
-    [dataObject getData];
+    _questionResult = [[QuestionsResultFetch alloc] init];
+    _questionResult.questionRequest = [[QuestionRequest alloc] init];
+    _questionResult.questionRequest.delegate = _questionResult;
+    _questionResult.delegate = self;
+    
+    [_questionResult fetchQuestions];
     
 }
 
@@ -55,31 +52,21 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return dataResult.count;
+    return questionGroupResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QuestionsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    QuestionsData *questionData = dataResult[indexPath.row];
-    
-    //Select image based on whether the answer is accepted or not
-    if (questionData.accepted_answer_id) {
-        cell.acceptedAnswerImageView.image =  [UIImage imageNamed: @"greencircle.png"];
-        
-    } else {
-        cell.acceptedAnswerImageView.image =  [UIImage imageNamed: @"greycircle.png"];
-    }
-    
-    cell.questionTitleLabel.text = questionData.title;
-    cell.answersLabel.text = [NSString stringWithFormat:@"%@", questionData.answer_count];
-    cell.tagsLabel.text =  [questionData.tags componentsJoinedByString:@" "];
+    QuestionsFields *questionFieldResult = questionGroupResult[indexPath.row];
+    cell.questionFields = questionFieldResult;
+
    
     return cell;
 }
 
-- (void)didReceiveData:(NSArray *)data {
-    dataResult = data;
+- (void)didReceiveQuestionGroups:(NSArray *)data {
+    questionGroupResult = data;
    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
@@ -88,7 +75,7 @@
     
 }
 
-- (void)fetchingDataFailedWithError:(NSError *)error {
+- (void)fetchingQuestionsFailedWithError:(NSError *)error {
     NSLog(@"Error %@; %@", error, [error localizedDescription]);
 }
 

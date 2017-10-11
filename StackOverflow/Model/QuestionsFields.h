@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QuestionsData : NSObject
+@interface QuestionsFields : NSObject
 
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSArray *tags;

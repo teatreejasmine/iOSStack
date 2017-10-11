@@ -7,28 +7,27 @@
 //
 
 #import "QuestionsResultFetch.h"
-#import "DataResult.h"
+#import "QuestionsResult.h"
 
 @implementation QuestionsResultFetch
-
 - (void)fetchQuestions {
     [self.questionRequest fetchData];
 }
 
-- (void)receivedDataJSON:(NSData *)objectNotation {
+- (void)receivedQuestionsJSON:(NSData *)objectNotation {
     NSError *error = nil;
-    NSArray *questionsGroup = [DataResult questionsDataFromJSON:objectNotation error:&error];
+    NSArray *questionsGroup = [QuestionsResult questionsResultFromJSON:objectNotation error:&error];
     
     if (error != nil) {
-        [self.delegate fetchingDataFailedWithError:error];
+        [self.delegate fetchingQuestionsFailedWithError:error];
 
     } else {
         [self.delegate didReceiveQuestionGroups:questionsGroup];
     }
 }
 
-- (void)fetchingDataFailedWithError:(NSError *)error {
-    [self.delegate fetchingDataFailedWithError:error];
+- (void)fetchingQuestionsFailedWithError:(NSError *)error {
+    [self.delegate fetchingQuestionsFailedWithError:error];
 }
 
 @end

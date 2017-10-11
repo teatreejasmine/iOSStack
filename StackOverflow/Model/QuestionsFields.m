@@ -6,8 +6,8 @@
 //  Copyright © 2017 DVT. All rights reserved.
 //
 
-#import "QuestionsData.h"
+#import "QuestionsFields.h"
 
-@implementation QuestionsData
+@implementation QuestionsFields
 
 @end

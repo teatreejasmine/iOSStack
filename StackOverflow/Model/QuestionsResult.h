@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataResult : NSObject
+@interface QuestionsResult : NSObject
 
-+ (NSArray *)questionsDataFromJSON:(NSData *)objectNotation error:(NSError **)error;
++ (NSArray *)questionsResultFromJSON:(NSData *)objectNotation error:(NSError **)error;
 
 
 @end

@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-#import "DataFetchDelegate.h"
-#import "QuestionsDelegate.h"
+#import "QuestionsFetchDelegate.h"
+#import "QuestionsRequestDelegate.h"
 #import "QuestionRequest.h"
 
 
 @class QuestionsRequest; 
 
-@interface QuestionsFetch : NSObject <QuestionsDelegate>
+@interface QuestionsResultFetch : NSObject <QuestionsRequestDelegate>
 
 @property (strong, nonatomic) QuestionRequest *questionRequest;
-@property (weak, nonatomic) id <DataFetchDelegate> delegate;
+@property (weak, nonatomic) id <QuestionsFetchDelegate> delegate;
 
 - (void)fetchQuestions;
 

@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuestionsFields.h"
 
-@interface QuestionsCell : UITableViewCell
+@interface QuestionsCell : UITableViewCell 
 
 @property (weak, nonatomic) IBOutlet UIImageView *acceptedAnswerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *questionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tagsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *answersLabel;
+@property (nonatomic) QuestionsFields *questionFields;
 
 @end

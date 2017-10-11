@@ -7,6 +7,7 @@
 //
 
 #import "QuestionsCell.h"
+#import "QuestionsFields.h"
 
 @implementation QuestionsCell
 
@@ -15,10 +16,29 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)setQuestionFields:(QuestionsFields *)questionFields {
+    //Select image based on whether the answer is accepted or not
+    if (questionFields.accepted_answer_id) {
+        self.acceptedAnswerImageView.image =  [UIImage imageNamed: @"greencircle.png"];
+        
+    } else {
+        self.acceptedAnswerImageView.image =  [UIImage imageNamed: @"greycircle.png"];
+    }
+    
+    self.questionTitleLabel.text = questionFields.title;
+    self.answersLabel.text = [NSString stringWithFormat:@"%@", questionFields.answer_count];
+    self.tagsLabel.text =  [questionFields.tags componentsJoinedByString:@" "];
+    
+    
+}
 
-    // Configure the view for the selected state
+- (void)prepareForReuse {
+    [super prepareForReuse];
+
+    self.questionTitleLabel.text = @"";
+    self.tagsLabel.text = @"";
+    self.answersLabel.text = @"";
+    self.acceptedAnswerImageView.image = nil;
 }
 
 @end

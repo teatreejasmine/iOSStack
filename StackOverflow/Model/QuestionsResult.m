@@ -6,13 +6,12 @@
 //  Copyright © 2017 DVT. All rights reserved.
 //
 
-#import "DataResult.h"
+#import "QuestionsResult.h"
 #import "QuestionsFields.h"
 
-@implementation DataResult
+@implementation QuestionsResult
 
-+ (NSArray *)questionsDataFromJSON:(NSData *)objectNotation error:(NSError **)error {
-    
++ (NSArray *)questionsResultFromJSON:(NSData *)objectNotation error:(NSError **)error {
     NSError *localError = nil;
     NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:objectNotation options:0 error:&localError];
     
@@ -21,30 +20,25 @@
         return nil;
     }
    
-    NSMutableArray *data = [[NSMutableArray alloc] init];
-    
+    NSMutableArray *result = [[NSMutableArray alloc] init];
     NSArray *results = [parsedObject valueForKey:@"items"];
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:results options:NSJSONWritingPrettyPrinted error:error];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
     NSError *err = nil;
     NSArray *array = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&err];
 
     for (NSDictionary *questionDictionary in array) {
         QuestionsFields *questionFields = [[QuestionsFields alloc] init];
-        
         for (NSString *key in questionDictionary) {
-
             if ([questionFields respondsToSelector:NSSelectorFromString(key)]) {
                 [questionFields setValue:[questionDictionary valueForKey:key] forKey:key];
 
             }
-
         }
-        [data addObject:questionFields];
+        [result addObject:questionFields];
     }
 
-    return data;
+    return result;
 }
 
 @end
