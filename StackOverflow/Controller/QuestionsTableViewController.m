@@ -47,7 +47,6 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     return 1;
 }
 
@@ -57,17 +56,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QuestionsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
     QuestionsFields *questionFieldResult = questionGroupResult[indexPath.row];
     cell.questionFields = questionFieldResult;
 
-   
     return cell;
 }
 
 - (void)didReceiveQuestionGroups:(NSArray *)data {
     questionGroupResult = data;
-   
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
         [activityIndicator stopAnimating];

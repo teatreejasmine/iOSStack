@@ -12,5 +12,4 @@
 
 + (NSArray *)questionsResultFromJSON:(NSData *)objectNotation error:(NSError **)error;
 
-
 @end

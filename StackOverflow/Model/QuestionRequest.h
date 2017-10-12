@@ -12,7 +12,7 @@
 
 @interface QuestionRequest : NSObject
 
-@property (weak, nonatomic) id<QuestionsRequestDelegate> delegate;
+@property (weak, nonatomic) NSObject<QuestionsRequestDelegate> *delegate;
 - (void)fetchQuestionsFromURL;
 
 @end

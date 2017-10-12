@@ -19,7 +19,7 @@
 @interface QuestionsResultFetch : NSObject <QuestionsRequestDelegate>
 
 @property (strong, nonatomic) QuestionRequest *questionRequest;
-@property (weak, nonatomic) id <QuestionsFetchDelegate> delegate;
+@property (weak, nonatomic) NSObject<QuestionsFetchDelegate> *delegate;
 - (void)fetchQuestions;
 
 @end
