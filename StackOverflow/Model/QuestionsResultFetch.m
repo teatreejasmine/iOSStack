@@ -11,19 +11,25 @@
 
 @implementation QuestionsResultFetch
 - (void)fetchQuestions {
-    [self.questionRequest fetchData];
+    [self.questionRequest fetchQuestionsFromURL];
 }
 
 - (void)receivedQuestionsJSON:(NSData *)objectNotation {
     NSError *error = nil;
     NSArray *questionsGroup = [QuestionsResult questionsResultFromJSON:objectNotation error:&error];
     
-    if (error != nil) {
-        [self.delegate fetchingQuestionsFailedWithError:error];
-
+    if (self.delegate) {
+        if (error != nil) {
+            [self.delegate fetchingQuestionsFailedWithError:error];
+            
+        } else {
+            [self.delegate didReceiveQuestionGroups:questionsGroup];
+        }
     } else {
-        [self.delegate didReceiveQuestionGroups:questionsGroup];
+         NSLog(@"Error: self.delegate %@", self.delegate);
+        
     }
+    
 }
 
 - (void)fetchingQuestionsFailedWithError:(NSError *)error {

@@ -20,7 +20,6 @@
 
 @property (strong, nonatomic) QuestionRequest *questionRequest;
 @property (weak, nonatomic) id <QuestionsFetchDelegate> delegate;
-
 - (void)fetchQuestions;
 
 @end

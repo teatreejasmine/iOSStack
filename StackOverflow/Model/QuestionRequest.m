@@ -11,7 +11,7 @@
 
 @implementation QuestionRequest
 
-- (void)fetchData {
+- (void)fetchQuestionsFromURL {
     NSString *urlAsString = [NSString stringWithFormat:@"https://api.stackexchange.com/2.2/questions?pagesize=50&order=desc&sort=creation&tagged=ios&site=stackoverflow"];
     NSURL *url = [[NSURL alloc] initWithString:urlAsString];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -23,6 +23,8 @@
             } else {
                 [self.delegate receivedQuestionsJSON:data];
             }
+        } else {
+            NSLog(@"Error: self.delegate %@", self.delegate);
         }
         
     }]resume];

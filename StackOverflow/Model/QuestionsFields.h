@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSArray *tags;
-@property (strong, nonatomic) NSString *answer_count;
-@property (strong, nonatomic) NSString *accepted_answer_id;
+@property (strong, nonatomic) NSString *answers;
+@property (strong, nonatomic) NSString *acceptedAnswerID;
 
 @end

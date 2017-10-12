@@ -18,17 +18,17 @@
 
 - (void)setQuestionFields:(QuestionsFields *)questionFields {
     //Select image based on whether the answer is accepted or not
-    if (questionFields.accepted_answer_id) {
+    if (questionFields.acceptedAnswerID) {
         self.acceptedAnswerImageView.image =  [UIImage imageNamed: @"greencircle.png"];
         
     } else {
         self.acceptedAnswerImageView.image =  [UIImage imageNamed: @"greycircle.png"];
+        
     }
-    
+
     self.questionTitleLabel.text = questionFields.title;
-    self.answersLabel.text = [NSString stringWithFormat:@"%@", questionFields.answer_count];
+    self.answersLabel.text = [NSString stringWithFormat:@"%@", questionFields.answers];
     self.tagsLabel.text =  [questionFields.tags componentsJoinedByString:@" "];
-    
     
 }
 

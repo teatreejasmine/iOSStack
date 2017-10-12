@@ -13,7 +13,7 @@
 
 + (NSArray *)questionsResultFromJSON:(NSData *)objectNotation error:(NSError **)error {
     NSError *localError = nil;
-    NSDictionary *parsedObject = [NSJSONSerialization JSONObjectWithData:objectNotation options:0 error:&localError];
+    NSDictionary *parsedQuestionDictionary = [NSJSONSerialization JSONObjectWithData:objectNotation options:0 error:&localError];
     
     if (localError != nil) {
         *error = localError;
@@ -21,19 +21,29 @@
     }
    
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    NSArray *results = [parsedObject valueForKey:@"items"];
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:results options:NSJSONWritingPrettyPrinted error:error];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSArray *results = [parsedQuestionDictionary valueForKey:@"items"];
+    NSData *questionsData = [NSJSONSerialization dataWithJSONObject:results options:NSJSONWritingPrettyPrinted error:error];
+    NSString *questionString = [[NSString alloc] initWithData:questionsData encoding:NSUTF8StringEncoding];
     NSError *err = nil;
-    NSArray *array = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&err];
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:[questionString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&err];
 
     for (NSDictionary *questionDictionary in array) {
         QuestionsFields *questionFields = [[QuestionsFields alloc] init];
         for (NSString *key in questionDictionary) {
-            if ([questionFields respondsToSelector:NSSelectorFromString(key)]) {
+            if ([key isEqualToString:@"answer_count"]) {
+                [questionFields setValue:[questionDictionary valueForKey:key] forKey:@"answers"];
+                
+            } else if([key isEqualToString:@"accepted_answer_id"]) {
+                [questionFields setValue:[questionDictionary valueForKey:key] forKey:@"acceptedAnswerID"];
+                
+            } else if([key isEqualToString:@"tags"]) {
                 [questionFields setValue:[questionDictionary valueForKey:key] forKey:key];
-
+                
+            } else if([key isEqualToString:@"title"]) {
+                [questionFields setValue:[questionDictionary valueForKey:key] forKey:key];
+                
             }
+                
         }
         [result addObject:questionFields];
     }
