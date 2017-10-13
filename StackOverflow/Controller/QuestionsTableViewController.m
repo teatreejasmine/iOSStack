@@ -58,7 +58,7 @@
     QuestionsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     QuestionsFields *questionFieldResult = questionGroupResult[indexPath.row];
     cell.questionFields = questionFieldResult;
-
+    
     return cell;
 }
 
@@ -74,7 +74,6 @@
 - (void)fetchingQuestionsFailedWithError:(NSError *)error {
     NSLog(@"Error %@; %@", error, [error localizedDescription]);
 }
-
 
 
 @end

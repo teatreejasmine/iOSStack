@@ -2,11 +2,12 @@
 //  StackOverflowTests.m
 //  StackOverflowTests
 //
-//  Created by Mali on 2017/10/04.
+//  Created by Malea Kotelo on 10/13/17.
 //  Copyright © 2017 DVT. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
+#import "QuestionsResultFetch.h"
 
 @interface StackOverflowTests : XCTestCase
 

@@ -21,6 +21,7 @@
 @property (strong, nonatomic) QuestionRequest *questionRequest;
 @property (weak, nonatomic) NSObject<QuestionsFetchDelegate> *delegate;
 - (void)fetchQuestions;
+- (NSArray *)questionsResultFromJSON:(NSData *)objectNotation error:(NSError **)error;
 
 @end
 
