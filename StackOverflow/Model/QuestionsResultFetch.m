@@ -38,7 +38,7 @@
 
 - (NSArray *)questionsResultFromJSON:(NSData *)objectNotation error:(NSError **)error {
     NSError *localError = nil;
-    NSDictionary *parsedQuestionDictionary = [NSJSONSerialization JSONObjectWithData:objectNotation options:0 error:&localError];
+    NSDictionary *parsedQuestionDictionary = [NSJSONSerialization JSONObjectWithData:objectNotation options:NSJSONReadingAllowFragments error:&localError];
     
     if (localError != nil) {
         *error = localError;
@@ -46,13 +46,13 @@
     }
     
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    NSArray *results = [parsedQuestionDictionary valueForKey:@"items"];
-    NSData *questionsData = [NSJSONSerialization dataWithJSONObject:results options:NSJSONWritingPrettyPrinted error:error];
+    NSArray *itemsResult = [parsedQuestionDictionary valueForKey:@"items"];
+    NSData *questionsData = [NSJSONSerialization dataWithJSONObject:itemsResult options:NSJSONWritingPrettyPrinted error:error];
     NSString *questionString = [[NSString alloc] initWithData:questionsData encoding:NSUTF8StringEncoding];
     NSError *err = nil;
-    NSArray *array = [NSJSONSerialization JSONObjectWithData:[questionString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&err];
+    NSArray *questionsArray = [NSJSONSerialization JSONObjectWithData:[questionString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&err];
     
-    for (NSDictionary *questionDictionary in array) {
+    for (NSDictionary *questionDictionary in questionsArray) {
         QuestionsFields *questionFields = [[QuestionsFields alloc] init];
         for (NSString *key in questionDictionary) {
             if ([key isEqualToString:@"answer_count"]) {
